@@ -1,19 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import Button from '@mui/material/Button';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import UserList from "./example1218/UserList";
 
+const queryClient = new QueryClient();
 
 function App({name}) {
 
 
   return (
-      <>
-    <h1>hello, {name}</h1>
-    <p>this is a react project</p>
-    <Button variant="contained">Click</Button>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <UserList />
+    </QueryClientProvider>
   )
 }
 
