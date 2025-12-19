@@ -3,6 +3,7 @@ import axios from "axios";
 import {Stack, List, ListItemText} from "@mui/material";
 import DeleteUserButton from "./DeleteUserButton";
 import AddUserButton from "./AddUserButton";
+import { useMemo } from "react";
 
 function getUsers() {
   return axios.get("https://jsonplaceholder.typicode.com/users")
@@ -14,6 +15,13 @@ export default function UsersList() {
     queryKey: ["users"], // cache key
     queryFn: getUsers
   });
+
+    
+    const sortedUsers = useMemo(()=>{
+        if (data != null) {
+       return data.sort((a,b)=>a.name.localeCompare(b.name))}
+       }, [data]);
+
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading users</p>;
